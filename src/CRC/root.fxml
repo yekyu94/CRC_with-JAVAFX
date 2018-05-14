@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -14,7 +15,7 @@
       <TextField fx:id="data" alignment="CENTER_RIGHT" layoutX="102.0" layoutY="101.0" onKeyReleased="#data" prefHeight="27.0" prefWidth="350.0" />
       <Text layoutX="25.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input Data" />
       <Text layoutX="35.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Divisor" />
-      <TextField fx:id="cal1" alignment="CENTER" layoutX="102.0" layoutY="66.0" prefHeight="27.0" prefWidth="262.0" />
+      <TextField fx:id="cal1" alignment="CENTER" layoutX="102.0" layoutY="66.0" onKeyReleased="#divi" prefHeight="27.0" prefWidth="262.0" />
       <TextArea fx:id="area1" editable="false" layoutX="50.0" layoutY="200.0" prefHeight="350.0" prefWidth="400.0" promptText="Input Data의 Ascii 표현값" wrapText="true" />
       <TextArea fx:id="area2" editable="false" layoutX="550.0" layoutY="200.0" prefHeight="350.0" prefWidth="400.0" promptText="Output Data의 Ascii 표현값" wrapText="true" />
       <Text layoutX="193.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input DATA (Ascii)" />
@@ -33,5 +34,6 @@
             <Font size="31.0" />
          </font>
       </Text>
+      <CheckBox fx:id="check1" layoutX="50.0" layoutY="182.0" mnemonicParsing="false" text="Ascii 단위로 표시" />
    </children>
 </AnchorPane>

@@ -16,12 +16,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import java.util.Arrays;
 
 public class RootControl implements Initializable{
 	@FXML private ComboBox<String> cal2;
 	@FXML private TextArea area1, area2;
-	@FXML private TextField cal1, data, rate;
-	@FXML private ImageView pointer;
+	@FXML private TextField cal1, data;
 	@FXML private CheckBox check1;
 	
 	char[] dataBox = new char[0];
@@ -31,7 +31,6 @@ public class RootControl implements Initializable{
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		pointer.setImage(new Image(getClass().getResource("pointer.png").toString()));
 		ObservableList<String> list = FXCollections.observableArrayList("Binary","HEX");
 		cal2.setItems(list);
 	}
@@ -48,13 +47,20 @@ public class RootControl implements Initializable{
 		dataControl();
 	}
 	
-	public void divi(KeyEvent e) {    //divisor 입력시 실행되는 부
+	public void divi(KeyEvent e) {    //divisor 입력시 실행되는 부분
 		dataControl();
 	}
 	
+	public void btn02(ActionEvent e) {    // 끊어서 보기 버튼 클릭시
+		dataControl();
+	}
+	
+	
+	
+	
+	
+	
 	public void dataControl() {
-		if(flag == 1) hex_to_bin();
-		
 		// box 1 : data 를 2진수로 변환하여 s라는 값에 저장시 -----
 		String bin_data = "";
 		for(int i=0; i<dataBox.length; i++) {
@@ -76,6 +82,8 @@ public class RootControl implements Initializable{
 		
 		try {
 			if(flag == 0) divisor = cal1.getText().toCharArray();
+			else if(flag == 1) hex_to_bin();
+			
 			char[] tmp_data = bin_data.toCharArray();
 			int leng_D = divisor.length; //Divisor의 길이
 			if(leng_D == 0) leng_D = 1;
@@ -96,8 +104,9 @@ public class RootControl implements Initializable{
 			}
 			// box 3 Fin.
 			
-			System.out.println(Arrays.toString(result));
+			//System.out.println(Arrays.toString(result));
 			
+			result(result, tmp_data.length);
 		}
 		catch(Exception error) {
 			area1.setText("올바른 Data와 Divisor가 입력되었는지 확인하세요.");
@@ -105,6 +114,15 @@ public class RootControl implements Initializable{
 		
 		
 	}
+	
+	public void result(int[] result, int size) {
+		String CRCvalue ="";
+		for(int i=size; i<result.length; i++) {
+			CRCvalue += result[i];
+		}
+		area2.setText("Result\n binary : " + CRCvalue);
+	}
+	
 	
 	public void hex_to_bin() {
 		String tmp = "";
@@ -133,10 +151,8 @@ public class RootControl implements Initializable{
 			case 'f': tmp += hex[15]; break;
 			}
 		}
+		tmp = Integer.parseInt(tmp) + "";	//divisor가 1부터 시작되도록 Int형으로 변환했다 문자열로 다시 만
 		divisor = tmp.toCharArray();
-		System.out.print("--->");
-		System.out.println(Arrays.toString(divisor));
-		
 	}
 	
 }
